@@ -22,6 +22,18 @@ class EmailRewriteRequest(BaseModel):
     instruction: str
 
 
+class EmailSaveDraftRequest(BaseModel):
+    """Request to save an email draft."""
+
+    recipient: str
+    subject: str
+    body: str
+    cc: Optional[str] = None
+    bcc: Optional[str] = None
+    transcript: Optional[str] = None
+    draft_id: Optional[int] = None
+
+
 class EmailSendRequest(BaseModel):
     """Request to send an email."""
 

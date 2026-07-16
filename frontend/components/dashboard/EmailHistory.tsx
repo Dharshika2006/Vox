@@ -20,8 +20,8 @@ export default function EmailHistoryList() {
 
   if (emails.length === 0) {
     return (
-      <div className="flex h-full flex-col items-center justify-center p-10 text-center bg-surface-bright rounded-[1.5rem] border border-surface-variant">
-        <div className="mb-6 rounded-full bg-surface-container-high p-6">
+      <div className="flex h-full flex-col items-center justify-center p-10 text-center bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]">
+        <div className="mb-6 rounded-full bg-white/60 shadow-sm p-6">
           <span className="material-symbols-outlined text-[32px] text-secondary">inbox</span>
         </div>
         <h3 className="font-headline-lg-mobile text-on-surface mb-2">
@@ -36,7 +36,7 @@ export default function EmailHistoryList() {
 
   return (
     <>
-      <div className="bg-surface-bright rounded-[1.5rem] p-4 md:p-8 border border-surface-variant shadow-[0_4px_24px_rgba(0,0,0,0.02)] w-full">
+      <div className="bg-white/40 backdrop-blur-xl rounded-[2rem] p-4 md:p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] w-full">
         {/* Table Header */}
         <div className="hidden md:grid grid-cols-12 gap-4 px-4 pb-4 border-b border-surface-variant mb-4 font-label-caps text-label-caps text-secondary tracking-widest">
           <div className="col-span-4">RECIPIENT</div>
@@ -51,7 +51,7 @@ export default function EmailHistoryList() {
             <div 
               key={email.id} 
               onClick={() => setSelectedEmail(email)}
-              className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-4 rounded-xl cursor-pointer transition-all hover:bg-surface-container hover:-translate-y-0.5 border border-transparent hover:border-surface-variant"
+              className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:bg-white/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-500/10 border border-transparent hover:border-white/80"
             >
               {/* Recipient */}
               <div className="col-span-1 md:col-span-4 flex items-center gap-3">
@@ -115,7 +115,7 @@ export default function EmailHistoryList() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="bg-surface-container-lowest rounded-[1.5rem] w-full max-w-2xl max-h-[85vh] flex flex-col shadow-[0_20px_40px_rgba(0,0,0,0.04)] overflow-hidden"
+              className="bg-white/90 backdrop-blur-2xl border border-white rounded-[2rem] w-full max-w-2xl max-h-[85vh] flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.1)] overflow-hidden"
             >
               {/* Header */}
               <div className="flex justify-between items-center p-6 border-b border-surface-variant">

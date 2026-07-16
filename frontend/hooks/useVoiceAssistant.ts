@@ -170,6 +170,11 @@ export function useVoiceAssistant() {
     clearTranscript();
   };
 
+  const loadDraft = useCallback((existingDraft: any) => {
+    setDraft(existingDraft);
+    setState("PREVIEW");
+  }, []);
+
   const stopSpeaking = useCallback(() => {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -192,5 +197,6 @@ export function useVoiceAssistant() {
     stopRecording,
     stopSpeaking,
     reset,
+    loadDraft,
   };
 }

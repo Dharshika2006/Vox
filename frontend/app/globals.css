@@ -37,11 +37,20 @@
   }
 }
 
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 @layer base {
   body {
-    background-color: white;
-    color: black;
+    background: linear-gradient(-45deg, #fafafa, #f3e8ff, #e0e7ff, #f8fafc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #111827;
     font-family: 'Inter', sans-serif;
+    min-height: 100vh;
   }
 }
 
@@ -56,12 +65,16 @@
   max-height: 600px;
   z-index: 0;
   pointer-events: none;
-  background: #E8F7DD;
+  background: #e9d5ff;
   border-radius: 50% 60% 40% 50% / 50% 40% 60% 50%;
   animation: var(--animate-morph);
+  filter: blur(60px);
+  opacity: 0.7;
 }
 
 .listening-active #shader-container {
-  background: #D4F48A;
+  background: #c7d2fe;
   animation: var(--animate-morph-fast);
+  filter: blur(40px);
+  opacity: 0.9;
 }

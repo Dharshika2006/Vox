@@ -8,6 +8,7 @@ from app.schemas.email import (
     EmailResponse,
     EmailHistoryResponse,
     EmailRewriteRequest,
+    EmailSaveDraftRequest,
 )
 from app.schemas.common import PaginatedResponse
 from app.models.user import User
@@ -27,6 +28,19 @@ def get_email_history(
     """Get paginated email history."""
     items, total = email_service.get_emails(current_user.id, skip, limit)
     return {"items": items, "total": total, "page": skip // limit + 1, "size": limit}
+
+
+@router.delete("/{email_id}")
+def delete_email(
+    email_id: int,
+    email_service: EmailService = Depends(get_email_service),
+    current_user: User = Depends(get_current_user),
+):
+    """Delete a specific email."""
+    success = email_service.delete_email(email_id, current_user.id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Email not found")
+    return {"status": "success"}
 
 
 @router.get("/{email_id}", response_model=EmailHistoryResponse)
@@ -60,6 +74,16 @@ async def rewrite_email(
 ):
     """Rewrite an email draft based on instructions."""
     return {"rewritten_text": await email_service.ai_service.rewrite_draft(request.draft_text, request.instruction)}
+
+
+@router.post("/save-draft", response_model=EmailHistoryResponse)
+def save_draft(
+    request: EmailSaveDraftRequest,
+    email_service: EmailService = Depends(get_email_service),
+    current_user: User = Depends(get_current_user),
+):
+    """Save an email draft without sending."""
+    return email_service.save_draft(current_user.id, request)
 
 
 @router.post("/send", response_model=EmailHistoryResponse)

@@ -29,9 +29,9 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex flex-col h-screen bg-white overflow-hidden relative">
+    <div className="flex flex-col h-screen bg-transparent overflow-hidden relative">
       {/* Top Navigation */}
-      <header className="flex justify-between items-center px-12 py-8 z-10 relative shrink-0">
+      <header className="flex justify-between items-center px-12 py-6 z-20 relative shrink-0 bg-white/40 backdrop-blur-xl border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
         <div className="flex items-center gap-8 md:gap-12">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -42,31 +42,31 @@ export default function DashboardLayout({
           <nav className="flex space-x-6 md:space-x-8 text-base md:text-lg font-medium text-gray-400">
             <Link 
               href="/dashboard/inbox" 
-            className={`transition-colors ${pathname === '/dashboard/inbox' ? 'text-black font-semibold' : 'hover:text-black'}`}
+            className={`transition-colors relative ${pathname === '/dashboard/inbox' ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600'}`}
           >
             Inbox
             {pathname === '/dashboard/inbox' && (
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-black rotate-45"></div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-indigo-600 rotate-45"></div>
             )}
           </Link>
           <div className="relative">
             <Link 
               href="/dashboard" 
-              className={`transition-colors ${pathname === '/dashboard' ? 'text-black font-semibold' : 'text-gray-400 hover:text-black'}`}
+              className={`transition-colors relative ${pathname === '/dashboard' ? 'text-indigo-600 font-semibold' : 'text-gray-400 hover:text-indigo-600'}`}
             >
               Compose
               {pathname === '/dashboard' && (
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-black rotate-45"></div>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-indigo-600 rotate-45"></div>
               )}
             </Link>
           </div>
           <Link 
             href="/dashboard/drafts" 
-            className={`transition-colors ${pathname === '/dashboard/drafts' ? 'text-black font-semibold' : 'hover:text-black'}`}
+            className={`transition-colors relative ${pathname === '/dashboard/drafts' ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600'}`}
           >
             Drafts
             {pathname === '/dashboard/drafts' && (
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-black rotate-45"></div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-indigo-600 rotate-45"></div>
             )}
           </Link>
         </nav>
@@ -94,27 +94,27 @@ export default function DashboardLayout({
       </main>
 
       {/* Bottom Navigation */}
-      <footer className="pb-12 z-10 relative shrink-0 mt-auto">
-        <nav className="flex justify-center space-x-16">
+      <footer className="pb-8 pt-4 z-20 relative shrink-0 mt-auto">
+        <nav className="mx-auto flex justify-center space-x-16 bg-white/50 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] px-12 py-4 rounded-full w-max">
           <Link href="/dashboard" className="flex flex-col items-center space-y-2 group">
-            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard' ? 'text-black' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
             </svg>
-            <span className={`text-[10px] tracking-widest uppercase font-bold ${pathname === '/dashboard' ? 'text-black' : 'text-gray-400'}`}>Assistant</span>
+            <span className={`text-[10px] tracking-widest uppercase font-bold transition-colors ${pathname === '/dashboard' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`}>Assistant</span>
           </Link>
           
           <Link href="/dashboard/contacts" className="flex flex-col items-center space-y-2 group">
-            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard/contacts' ? 'text-black' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard/contacts' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
             </svg>
-            <span className={`text-[10px] tracking-widest uppercase font-bold ${pathname === '/dashboard/contacts' ? 'text-black' : 'text-gray-400'}`}>Global</span>
+            <span className={`text-[10px] tracking-widest uppercase font-bold transition-colors ${pathname === '/dashboard/contacts' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`}>Global</span>
           </Link>
           
           <Link href="/dashboard/learn" className="flex flex-col items-center space-y-2 group">
-            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard/learn' ? 'text-black' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`w-6 h-6 transition-transform group-hover:-translate-y-1 ${pathname === '/dashboard/learn' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span className={`text-[10px] tracking-widest uppercase font-bold ${pathname === '/dashboard/learn' ? 'text-black' : 'text-gray-400'}`}>Learn</span>
+            <span className={`text-[10px] tracking-widest uppercase font-bold transition-colors ${pathname === '/dashboard/learn' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-400'}`}>Learn</span>
           </Link>
         </nav>
       </footer>

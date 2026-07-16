@@ -31,6 +31,10 @@ export function useEmailHistory() {
     }
   }, [error]);
 
+  const removeEmail = useCallback((id: number) => {
+    setEmails((prev) => prev.filter((email) => email.id !== id));
+  }, []);
+
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
       fetchHistory((page + 1) * 50, 50, true);
@@ -61,5 +65,7 @@ export function useEmailHistory() {
     fetchHistory,
     loadMore,
     sendDraft,
+    refresh: () => fetchHistory(0, 50, false),
+    removeEmail,
   };
 }

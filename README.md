@@ -12,30 +12,21 @@ Draft, edit, and send emails effortlessly using only your voice.
 
 ## Overview
 
+Vox is an intelligent, voice-first email management system designed to streamline your communication. By combining native Web Audio processing, natural language understanding, and seamless Gmail integration, Vox allows you to draft, edit, and send emails effortlessly using only your voice.
+
 Traditional email clients require constant typing and screen interaction. Vox reimagines this process with a highly responsive, voice-first conversational interface. Simply speak your thoughts, and Vox translates them into professional, ready-to-send emails — managing the entire lifecycle from intent recognition to contact resolution, drafting, review, and sending.
 
-Built from the ground up to prioritize speed, accuracy, and a premium user experience, Vox pairs an ultra-lightweight frontend with a robust, scalable backend.
-
-## Table of Contents
-
-- [Key Features](#key-features)
-- [Technical Architecture](#technical-architecture)
-- [Getting Started](#getting-started)
-- [Usage Guide](#usage-guide)
-- [Security and Privacy](#security-and-privacy)
-- [Author](#author)
+This project was built from the ground up to prioritize speed, accuracy, and premium user experience. It leverages an ultra-lightweight frontend architecture and a robust, scalable backend.
 
 ## Key Features
 
-| Feature | Description |
-|---|---|
-| **Conversational Interface** | Interact naturally — Vox understands context and handles multi-turn conversations effortlessly. |
-| **Native Voice Activity Detection** | Uses the browser's native Web Audio API (`AnalyserNode`) to precisely detect speech start/stop — no external dependencies, no WebAssembly binaries, blazing-fast load times. |
-| **Intelligent Contact Resolution** | Automatically searches your contact list by spoken name and asks for clarification when multiple matches are found. |
-| **AI-Powered Drafting & Formatting** | Generates professional, perfectly formatted HTML emails from casual spoken prompts, responsive across desktop and mobile clients. |
-| **Gmail Integration** | Connects securely via OAuth2 to send emails directly from your Google account. |
-| **Dynamic State Machine** | Tracks conversation progress, pending intents, and required clarifications on the backend. |
-| **Premium UI** | A sleek, responsive Next.js + Tailwind dashboard with real-time ambient audio visualization and a dedicated Learn section. |
+- **Conversational Interface:** Interact with the assistant naturally. Vox understands context and can handle multi-turn conversations effortlessly.
+- **Native Voice Activity Detection:** Utilizes the browser's native Web Audio API (`AnalyserNode`) to precisely detect when you start and stop speaking. This provides a fluid, push-to-talk-free experience with zero external dependencies, no bulky WebAssembly binaries, and blazing fast load times.
+- **Intelligent Contact Resolution:** Automatically searches your contact list based on spoken names. If multiple matches are found, the assistant will ask for clarification.
+- **AI-Powered Drafting and Formatting:** Generates professional email drafts from casual spoken prompts. Emails are constructed as perfectly formatted HTML, ensuring edge-to-edge responsiveness on both desktop and mobile email clients.
+- **Gmail Integration:** Connects securely to your Google account using OAuth2 to send emails directly from your address.
+- **Dynamic State Machine:** The backend employs a sophisticated state machine to track conversation progress, pending intents, and required clarifications.
+- **Premium User Interface:** A sleek, responsive dashboard built with Next.js and Tailwind CSS. It features real-time visual audio feedback (dynamic ambient shader), seamless navigation, and a dedicated Learn section.
 
 ## Technical Architecture
 
@@ -45,20 +36,20 @@ Vox consists of two primary components: a high-performance backend and a modern 
 
 Built with **Python** and **FastAPI**, handling API routing, state management, and third-party integrations.
 
-- **Framework:** FastAPI for high-performance, asynchronous API endpoints
-- **Database:** SQLite with SQLAlchemy ORM for users, contacts, email history, and conversation state
-- **AI Integration:** LLMs via Groq and LiteLLM for intent classification, contact extraction, and natural language generation
-- **Email Service:** Gmail API integration for authentication and sending multipart (HTML/plain text) emails
-- **Architecture:** Dependency injection keeps services and repositories decoupled, maintainable, and testable
+- **Framework:** FastAPI for high-performance, asynchronous API endpoints.
+- **Database:** SQLite with SQLAlchemy ORM for managing users, contacts, email history, and conversation states.
+- **AI Integration:** Utilizes advanced LLMs (via Groq and LiteLLM) for intent classification, contact extraction, and natural language generation.
+- **Email Service:** Integrates with the Gmail API for authenticating users and sending multipart (HTML/Plain Text) emails.
+- **Dependency Injection:** Services and repositories are decoupled and injected into routers, ensuring maintainable and testable code.
 
 ### Frontend
 
 A single-page application built for a seamless, app-like experience.
 
-- **Framework:** Next.js and React
-- **Styling:** Tailwind CSS v4 with custom theme variables for rapid, responsive UI development
-- **Audio Processing:** Native `MediaRecorder` API and `AudioContext` (`AnalyserNode`) for ultra-efficient, real-time voice activity detection
-- **State Management:** Custom React hooks manage API interactions, smart authentication routing, audio streams, and conversation state sync
+- **Framework:** Next.js and React.
+- **Styling:** Tailwind CSS (v4) for rapid, responsive UI development with custom theme variables.
+- **Audio Processing:** Uses the browser's native `MediaRecorder` API and `AudioContext` (`AnalyserNode`) for ultra-efficient, real-time voice activity detection without external plugins.
+- **State Management:** Custom React hooks manage API interactions, smart authentication routing, audio streams, and conversation state synchronization with the backend.
 
 ## Getting Started
 
@@ -122,6 +113,10 @@ npm run dev                   # runs on http://localhost:3000
 4. **Clarify if Needed** — If a contact is ambiguous or missing an email address, Vox will prompt you verbally and visually.
 5. **Review and Send** — Review the generated draft, cleanly structured into paragraphs, then click **Send** or say *"Yes"* to dispatch the email.
 
+## Design Philosophy
+
+The design of Vox emphasizes clarity, focus, and a premium aesthetic. The interface is intentionally minimalist, highlighting the conversation and the drafted content rather than overwhelming the user with complex menus. The visual language uses high contrast, dynamic ambient shaders, and subtle micro-animations to provide feedback without distraction.
+
 ## Security and Privacy
 
 Vox requires access to your Google account to send emails. Authentication is handled securely via OAuth2 — the application never sees or stores your Google password. Conversation history and drafts are stored securely in the local database and are accessible only to your authenticated session.
@@ -129,3 +124,5 @@ Vox requires access to your Google account to send emails. Authentication is han
 ## Author
 
 Developed by **Dharshika**.
+
+This project represents a complete, production-ready implementation of an AI voice assistant, demonstrating advanced full-stack development, seamless UI/UX design, API integration, and natural language processing capabilities.

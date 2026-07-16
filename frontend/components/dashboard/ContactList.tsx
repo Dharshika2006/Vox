@@ -78,8 +78,8 @@ export default function ContactList() {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-[0_10px_50px_-12px_rgba(0,0,0,0.1)] w-full max-w-5xl mx-auto relative z-20">
-      <div className="border-b border-gray-100 bg-white px-8 py-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+    <div className="flex flex-col h-full bg-white/40 backdrop-blur-2xl rounded-[2rem] border border-white/60 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.04)] w-full max-w-5xl mx-auto relative z-20">
+      <div className="border-b border-white/40 bg-white/30 backdrop-blur-md px-8 py-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-semibold text-black">Contacts</h2>
           <span className="text-sm text-gray-400 font-medium">{contacts.length} people</span>
@@ -106,7 +106,7 @@ export default function ContactList() {
           
           <button 
             onClick={() => setIsAddingContact(true)}
-            className="flex items-center justify-center bg-black hover:bg-gray-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-md whitespace-nowrap active:scale-95"
+            className="flex items-center justify-center bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-indigo-500/20 whitespace-nowrap active:scale-95"
           >
             <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -116,7 +116,7 @@ export default function ContactList() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6 md:p-8 bg-gray-50/30">
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 bg-transparent">
         {contacts.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center p-8">
             <div className="mb-6 rounded-full bg-gray-100 p-5">
@@ -140,7 +140,7 @@ export default function ContactList() {
                   setSelectedContact(contact);
                   setIsEditingContact(false);
                 }}
-                className="group flex flex-col p-6 rounded-2xl border border-gray-100 bg-white hover:border-black hover:shadow-lg transition-all cursor-pointer relative"
+                className="group flex flex-col p-6 rounded-2xl border border-transparent bg-white/60 hover:bg-white/80 hover:border-white/80 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer relative backdrop-blur-sm"
               >
                 {contact.is_favorite && (
                   <div className="absolute top-4 right-4 text-yellow-400">

@@ -15,6 +15,15 @@ class EmailRepository:
     def __init__(self, db: Session):
         self.db = db
 
+    def delete(self, email_id: int, user_id: int) -> bool:
+        """Delete an email."""
+        email = self.get_by_id(email_id, user_id)
+        if email:
+            self.db.delete(email)
+            self.db.commit()
+            return True
+        return False
+
     def get_by_id(self, email_id: int, user_id: int) -> Optional[EmailHistory]:
         """Get an email by ID and user ID."""
         return (

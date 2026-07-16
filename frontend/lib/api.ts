@@ -74,10 +74,21 @@ export const api = {
       }),
   },
   emails: {
+    get: (id: number) =>
+      request<any>(`/emails/${id}`),
     getHistory: (skip = 0, limit = 50) => 
       request<{ items: any[], total: number }>(`/emails?skip=${skip}&limit=${limit}`),
+    delete: (id: number) =>
+      request<any>(`/emails/${id}`, {
+        method: "DELETE",
+      }),
     send: (data: unknown) => 
       request<unknown>("/emails/send", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
+    saveDraft: (data: unknown) => 
+      request<unknown>("/emails/save-draft", {
         method: "POST",
         body: JSON.stringify(data),
       }),

@@ -1,6 +1,6 @@
 """Email Service for managing drafts and sending."""
 
-from app.schemas.email import EmailDraftRequest, EmailSendRequest
+from app.schemas.email import EmailDraftRequest, EmailSendRequest, EmailSaveDraftRequest
 from app.repositories.email_repository import EmailRepository
 from app.services.gmail_service import GmailService
 from app.services.ai_service import AIService
@@ -27,6 +27,10 @@ class EmailService:
         """Get a specific email."""
         return self.email_repo.get_by_id(email_id, user_id)
 
+    def delete_email(self, email_id: int, user_id: int) -> bool:
+        """Delete a specific email."""
+        return self.email_repo.delete(email_id, user_id)
+
     async def draft_email(self, user_id: int, request: EmailDraftRequest):
         """Draft a new email from a transcript."""
         # This is a one-shot draft generation without conversation state
@@ -49,6 +53,24 @@ class EmailService:
             bcc=draft_content.get("bcc"),
             transcript=request.transcript,
         )
+
+    def save_draft(self, user_id: int, request: EmailSaveDraftRequest):
+        """Save a draft without sending."""
+        if request.draft_id:
+            email = self.email_repo.update_draft(request.draft_id, user_id, request)
+            if not email:
+                raise ValueError("Draft not found or already sent")
+            return email
+        else:
+            return self.email_repo.create_draft(
+                user_id=user_id,
+                recipient=request.recipient,
+                subject=request.subject,
+                body=request.body,
+                cc=request.cc,
+                bcc=request.bcc,
+                transcript=request.transcript,
+            )
 
     def send_email(self, user_id: int, request: EmailSendRequest):
         """Send an email."""

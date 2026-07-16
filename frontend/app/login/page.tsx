@@ -33,7 +33,7 @@ function LoginForm() {
       <button 
         onClick={handleLogin}
         disabled={isLoading || isLoggingIn}
-        className="w-full h-14 bg-black border border-outline-variant/50 text-white hover:bg-gray-900 rounded-xl font-headline-sm text-[16px] shadow-sm flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+        className="w-full h-14 bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700 rounded-xl font-headline-sm text-[16px] shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
       >
         {isLoggingIn ? (
           <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>

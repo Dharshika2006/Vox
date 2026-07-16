@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 export default function Home() {
   const { isAuthenticated, isLoading } = useAuth();
   return (
-    <div className="bg-white text-black min-h-screen flex flex-col relative overflow-hidden selection:bg-black selection:text-white">
+    <div className="bg-transparent text-gray-900 min-h-screen flex flex-col relative overflow-hidden selection:bg-indigo-500 selection:text-white">
       {/* Background Blob matching the dashboard */}
       <div 
         id="shader-container" 
@@ -28,9 +28,9 @@ export default function Home() {
       </header>
       
       <main className="flex-grow flex flex-col justify-center items-center relative z-10 px-6 md:px-10 pt-24 pb-16 w-full">
-        <div className="max-w-4xl w-full flex flex-col items-center text-center relative">
+        <div className="max-w-4xl w-full flex flex-col items-center text-center relative bg-white/40 backdrop-blur-2xl border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[3rem] p-12 md:p-20">
           
-          <div className="relative w-24 h-24 mb-12 flex items-center justify-center rounded-full bg-black">
+          <div className="relative w-24 h-24 mb-12 flex items-center justify-center rounded-full bg-gradient-to-tr from-violet-600 to-indigo-600 shadow-lg shadow-indigo-500/30 transform transition-transform hover:scale-110 duration-300">
             <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
             </svg>
@@ -46,15 +46,15 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             {!isLoading && isAuthenticated ? (
-              <Link href="/dashboard" className="px-8 py-4 bg-black text-white rounded-full text-lg font-semibold hover:bg-gray-900 transition-all min-w-[200px] flex items-center justify-center">
+              <Link href="/dashboard" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-lg font-semibold hover:from-violet-700 hover:to-indigo-700 transition-all min-w-[200px] flex items-center justify-center">
                 Go to Dashboard
               </Link>
             ) : (
               <>
-                <Link href="/login" className="px-8 py-4 bg-black text-white rounded-full text-lg font-semibold hover:bg-gray-900 transition-all min-w-[200px] flex items-center justify-center">
+                <Link href="/login" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-lg font-semibold hover:from-violet-700 hover:to-indigo-700 transition-all min-w-[200px] flex items-center justify-center">
                   Start Speaking
                 </Link>
-                <Link href="/login" className="px-8 py-4 bg-white border border-gray-200 text-black rounded-full text-lg font-semibold hover:bg-gray-50 transition-colors min-w-[200px] flex items-center justify-center">
+                <Link href="/login" className="px-8 py-4 bg-white/50 backdrop-blur-sm border border-white/60 text-gray-800 rounded-full text-lg font-semibold hover:bg-white/70 transition-all min-w-[200px] flex items-center justify-center shadow-sm hover:shadow">
                   See Demo
                 </Link>
               </>
