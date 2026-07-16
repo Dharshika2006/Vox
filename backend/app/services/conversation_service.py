@@ -12,6 +12,7 @@ from app.services.email_service import EmailService
 from app.schemas.conversation import ConversationResponse
 from app.schemas.email import EmailSendRequest
 from app.models.conversation_session import ConversationSession
+from app.models.user import User
 
 
 class ConversationService:
@@ -59,12 +60,12 @@ class ConversationService:
             self.db.commit()
 
     async def process_message(
-        self, transcript: str, user_id: int, session_id: Optional[str] = None
+        self, transcript: str, user: User, session_id: Optional[str] = None
     ) -> ConversationResponse:
         """Process a new message in a conversation state machine with error handling."""
         from app.exceptions import ProviderError
         try:
-            return await self._process_message_internal(transcript, user_id, session_id)
+            return await self._process_message_internal(transcript, user, session_id)
         except ProviderError:
             return ConversationResponse(
                 session_id=session_id or "",
@@ -74,7 +75,7 @@ class ConversationService:
             )
 
     async def _process_message_internal(
-        self, transcript: str, user_id: int, session_id: Optional[str] = None
+        self, transcript: str, user: User, session_id: Optional[str] = None
     ) -> ConversationResponse:
         """Internal processing logic."""
 
@@ -120,6 +121,7 @@ class ConversationService:
             draft = await self.ai_service.generate_draft(
                 recipient=selected_contact["name"],
                 message=session["pending_message"],
+                user_signature=user.name
             )
             
             session["draft"] = draft
@@ -154,7 +156,7 @@ class ConversationService:
                         transcript=session["pending_message"]
                     )
                     
-                    self.email_service.send_email(user_id=user_id, request=send_req)
+                    self.email_service.send_email(user_id=user.id, request=send_req)
                     
                     session["state"] = "SUCCESS"
                     self._save_session(db_session, session)
@@ -215,6 +217,7 @@ class ConversationService:
             draft = await self.ai_service.generate_draft(
                 recipient=selected_contact["name"],
                 message=session["pending_message"],
+                user_signature=user.name
             )
             
             session["draft"] = draft
@@ -268,7 +271,7 @@ class ConversationService:
         session["pending_message"] = message_body
         
         # Contact Resolution
-        contacts, total = self.contact_service.get_contacts(user_id=user_id, search=recipient_name)
+        contacts, total = self.contact_service.get_contacts(user_id=user.id, search=recipient_name)
         
         if len(contacts) == 0:
             # Fix 3.5: No Contact Fallback
@@ -306,6 +309,7 @@ class ConversationService:
         draft = await self.ai_service.generate_draft(
             recipient=selected_contact["name"],
             message=session["pending_message"],
+            user_signature=user.name
         )
         
         session["draft"] = draft

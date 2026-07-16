@@ -2,13 +2,20 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 function LoginForm() {
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, isAuthenticated } = useAuth();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, isLoading, router]);
 
   const handleLogin = async () => {
     setIsLoggingIn(true);

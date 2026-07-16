@@ -1,8 +1,10 @@
 "use client";
 
 import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Home() {
+  const { isAuthenticated, isLoading } = useAuth();
   return (
     <div className="bg-white text-black min-h-screen flex flex-col relative overflow-hidden selection:bg-black selection:text-white">
       {/* Background Blob matching the dashboard */}
@@ -19,7 +21,7 @@ export default function Home() {
           <span className="font-semibold text-lg tracking-tight">Vox</span>
         </div>
         <div className="flex items-center">
-          <Link href="/login" className="hover:opacity-80 transition-opacity flex items-center justify-center w-10 h-10 rounded-full bg-gray-100">
+          <Link href={isAuthenticated ? "/dashboard" : "/login"} className="hover:opacity-80 transition-opacity flex items-center justify-center w-10 h-10 rounded-full bg-gray-100">
             <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
           </Link>
         </div>
@@ -43,12 +45,20 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link href="/login" className="px-8 py-4 bg-black text-white rounded-full text-lg font-semibold hover:bg-gray-900 transition-all min-w-[200px] flex items-center justify-center">
-              Start Speaking
-            </Link>
-            <Link href="/login" className="px-8 py-4 bg-white border border-gray-200 text-black rounded-full text-lg font-semibold hover:bg-gray-50 transition-colors min-w-[200px] flex items-center justify-center">
-              See Demo
-            </Link>
+            {!isLoading && isAuthenticated ? (
+              <Link href="/dashboard" className="px-8 py-4 bg-black text-white rounded-full text-lg font-semibold hover:bg-gray-900 transition-all min-w-[200px] flex items-center justify-center">
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link href="/login" className="px-8 py-4 bg-black text-white rounded-full text-lg font-semibold hover:bg-gray-900 transition-all min-w-[200px] flex items-center justify-center">
+                  Start Speaking
+                </Link>
+                <Link href="/login" className="px-8 py-4 bg-white border border-gray-200 text-black rounded-full text-lg font-semibold hover:bg-gray-50 transition-colors min-w-[200px] flex items-center justify-center">
+                  See Demo
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </main>

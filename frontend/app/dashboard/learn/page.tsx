@@ -25,7 +25,7 @@ export default function LearnPage() {
       title: "Intent Recognition",
       desc: "Our AI processes the audio, extracts context from your contacts, determines the recipient, and structures the email perfectly.",
       icon: "psychology",
-      colSpan: "col-span-1 md:col-span-2",
+      colSpan: "col-span-1",
       delay: 0.3
     },
     {
@@ -33,13 +33,13 @@ export default function LearnPage() {
       title: "Generation & Review",
       desc: "A draft overlay appears with the To, Subject, and Message pre-filled. You can edit it manually or just tap Send.",
       icon: "draw",
-      colSpan: "col-span-1 md:col-span-2",
+      colSpan: "col-span-1",
       delay: 0.4
     }
   ];
 
   return (
-    <div className="flex h-full flex-col relative z-10 items-center w-full max-w-5xl mx-auto">
+    <div className="flex h-full flex-col relative z-10 items-center w-full max-w-5xl mx-auto px-4 md:px-12">
       
       {/* Background ambient blob for visual interest */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] animate-[pulse-organic_10s_ease-in-out_infinite_alternate] pointer-events-none z-[-1]" />
@@ -74,7 +74,7 @@ export default function LearnPage() {
             </div>
 
             {/* Decorative background number */}
-            <div className="absolute -right-4 -bottom-8 font-display text-[120px] text-on-surface/5 font-bold pointer-events-none transition-transform group-hover:scale-110 group-hover:-translate-y-2">
+            <div className="absolute -right-4 -bottom-8 font-display text-[120px] text-black opacity-5 font-bold pointer-events-none transition-transform group-hover:scale-110 group-hover:-translate-y-2">
               {step.id.replace('step', '')}
             </div>
           </motion.div>

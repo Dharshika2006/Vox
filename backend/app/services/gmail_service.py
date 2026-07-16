@@ -37,6 +37,12 @@ class GmailService:
 
             message = EmailMessage()
             message.set_content(body)
+            
+            # Add HTML version to prevent mobile clients from hard-wrapping plain text sentences
+            html_body = body.replace('\n', '<br>')
+            # Add some basic styling so it looks native and clean
+            html_body = f'<div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #000000;">{html_body}</div>'
+            message.add_alternative(html_body, subtype='html')
 
             message["To"] = recipient
             message["Subject"] = subject

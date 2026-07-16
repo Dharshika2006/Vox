@@ -18,7 +18,7 @@ async def process_conversation(
 ):
     """Process a message in a conversation."""
     return await conversation_service.process_message(
-        request.transcript, current_user.id, request.session_id
+        request.transcript, current_user, request.session_id
     )
 
 

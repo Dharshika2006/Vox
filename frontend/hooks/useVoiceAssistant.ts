@@ -125,10 +125,16 @@ export function useVoiceAssistant() {
             startRecording();
           } else {
             // Keep in current state (PREVIEW, SUCCESS, or ERROR)
-            if (response.state === "PREVIEW") setState("PREVIEW");
-            else if (response.state === "SUCCESS") setState("SUCCESS");
-            else if (response.state === "ERROR") setState("ERROR");
-            else setState("IDLE");
+            if (response.state === "PREVIEW") {
+              setState("PREVIEW");
+            } else if (response.state === "SUCCESS") {
+              setState("SUCCESS");
+              setTimeout(() => reset(), 3000);
+            } else if (response.state === "ERROR") {
+              setState("ERROR");
+            } else {
+              setState("IDLE");
+            }
             isHandlingTranscript.current = false;
           }
         });

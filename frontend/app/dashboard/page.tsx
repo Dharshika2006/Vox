@@ -10,6 +10,7 @@ import { EmailDraft } from "@/types";
 export default function DashboardPage() {
   const assistant = useVoiceAssistant();
   const [isSending, setIsSending] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const { success, error } = useToast();
 
   const handleSend = async (draft: EmailDraft) => {
@@ -17,7 +18,11 @@ export default function DashboardPage() {
     try {
       await api.emails.send(draft);
       success("Email sent successfully!");
-      assistant.reset();
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+        assistant.reset();
+      }, 3000);
     } catch (err: any) {
       error(err.message || "Failed to send email");
     } finally {
@@ -30,7 +35,8 @@ export default function DashboardPage() {
       <VoiceInterface 
         assistant={assistant} 
         onSend={handleSend} 
-        isSending={isSending} 
+        isSending={isSending}
+        isSuccess={isSuccess}
       />
     </>
   );

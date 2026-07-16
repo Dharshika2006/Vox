@@ -32,9 +32,16 @@ export default function DashboardLayout({
     <div className="flex flex-col h-screen bg-white overflow-hidden relative">
       {/* Top Navigation */}
       <header className="flex justify-between items-center px-12 py-8 z-10 relative shrink-0">
-        <nav className="flex space-x-8 text-lg font-medium text-gray-400">
-          <Link 
-            href="/dashboard/inbox" 
+        <div className="flex items-center gap-8 md:gap-12">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+            </svg>
+            <span className="font-semibold text-lg tracking-tight text-black hidden sm:block">Vox</span>
+          </Link>
+          <nav className="flex space-x-6 md:space-x-8 text-base md:text-lg font-medium text-gray-400">
+            <Link 
+              href="/dashboard/inbox" 
             className={`transition-colors ${pathname === '/dashboard/inbox' ? 'text-black font-semibold' : 'hover:text-black'}`}
           >
             Inbox
@@ -63,7 +70,8 @@ export default function DashboardLayout({
             )}
           </Link>
         </nav>
-        <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 cursor-pointer">
+        </div>
+        <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden border border-gray-200 cursor-pointer">
           {user?.picture ? (
             <img 
               alt="User Profile" 

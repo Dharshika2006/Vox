@@ -2,27 +2,28 @@
 
 import { useVoiceAssistant } from "@/hooks/useVoiceAssistant";
 import { EmailDraft } from "@/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface VoiceInterfaceProps {
   assistant: ReturnType<typeof useVoiceAssistant>;
   onSend: (draft: EmailDraft) => Promise<void>;
   isSending: boolean;
+  isSuccess?: boolean;
 }
 
-export default function VoiceInterface({ assistant, onSend, isSending }: VoiceInterfaceProps) {
+export default function VoiceInterface({ assistant, onSend, isSending, isSuccess = false }: VoiceInterfaceProps) {
   const { state, startInteraction, reset, draft, stopRecording } = assistant;
 
   // Local state for inline editing
   const [editableDraft, setEditableDraft] = useState<EmailDraft | null>(null);
 
-  // Initialize editable draft when we receive one
-  if (draft && !editableDraft) {
-    setEditableDraft(draft);
-  }
+  // Sync editable draft when the backend draft changes
+  useEffect(() => {
+    setEditableDraft(draft || null);
+  }, [draft]);
 
   const isListening = state === "LISTENING" || state === "PROCESSING" || state === "SPEAKING";
-  const showConfirm = (state === "PREVIEW" || draft) && editableDraft;
+  const showConfirm = (state === "PREVIEW" || state === "SUCCESS" || isSuccess || draft) && editableDraft;
 
   const handleFieldChange = (field: keyof EmailDraft, value: string) => {
     if (editableDraft) {
@@ -133,11 +134,15 @@ export default function VoiceInterface({ assistant, onSend, isSending }: VoiceIn
                 Cancel
               </button>
               <button 
-                onClick={() => editableDraft && onSend(editableDraft)}
-                disabled={isSending || !editableDraft?.recipient || !editableDraft?.subject}
-                className="bg-black text-white text-sm tracking-widest font-bold uppercase px-8 py-4 rounded-full hover:bg-gray-900 transition-colors flex items-center space-x-2 disabled:opacity-50"
+                onClick={() => {
+                  if (editableDraft && !isSuccess && state !== "SUCCESS") {
+                    onSend(editableDraft);
+                  }
+                }}
+                disabled={isSending || isSuccess || state === "SUCCESS" || !editableDraft?.recipient || !editableDraft?.subject}
+                className={`text-white text-sm tracking-widest font-bold uppercase px-8 py-4 rounded-full transition-colors flex items-center space-x-2 disabled:opacity-50 ${isSuccess || state === "SUCCESS" ? "bg-green-600 hover:bg-green-700" : "bg-black hover:bg-gray-900"}`}
               >
-                <span>{isSending ? "Sending..." : "Send via Gmail"}</span>
+                <span>{isSending ? "Sending..." : isSuccess || state === "SUCCESS" ? "Sent Successfully!" : "Send via Gmail"}</span>
               </button>
             </div>
           </div>

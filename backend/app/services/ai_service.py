@@ -88,7 +88,8 @@ If you cannot determine the intent or recipient, use null for those fields. Do n
         system_prompt = """
 You are an expert executive assistant. Draft a professional, clear, and concise email based on the user's brief message.
 You must expand on their brief message to make it sound professional.
-Include a proper subject line, a proper greeting using the recipient's name, a professional body, and a proper closing.
+Include a proper subject line, a proper greeting using the recipient's name, a professional structured body (use \n\n for paragraph breaks to ensure it is not one big paragraph), and a proper closing.
+DO NOT use placeholder brackets like [Your Name] for the signature. Simply end with "Best regards," (or whatever closing is appropriate) if no specific signature is provided.
 
 Output ONLY a JSON object with the finalized email fields. Do not add conversational filler.
 """
